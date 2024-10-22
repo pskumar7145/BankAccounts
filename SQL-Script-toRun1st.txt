@@ -1,0 +1,30 @@
+
+USE [BankAccount]
+GO
+
+INSERT [dbo].[Accounts] ([Id], [FirstName], [LastName], [Email], [AccountNumber], [Balance]) VALUES (N'4a62ae47-3cee-4f69-0cbc-08dcf0f3b2d2', N'Selva', N'K', N'selvaK@email.com', N'123456789090', CAST(130.39 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[Accounts] ([Id], [FirstName], [LastName], [Email], [AccountNumber], [Balance]) VALUES (N'06066f60-474f-4ce5-0e76-08dcf1951097', N'Test1-FName', N'Test1-LName', N'Test1@test1.com', N'123456789091', CAST(25050.00 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[Interests] ([Id], [Date], [RuleId], [Rate]) VALUES (N'a9a466b7-a344-4618-c13d-08dcf0f4397c', CAST(N'2023-01-01T10:44:50.6909432' AS DateTime2), N'RULE01', CAST(1.95 AS Decimal(5, 2)))
+GO
+INSERT [dbo].[Interests] ([Id], [Date], [RuleId], [Rate]) VALUES (N'cc8699eb-0508-4827-c13e-08dcf0f4397c', CAST(N'2023-05-20T10:48:26.0720081' AS DateTime2), N'RULE02', CAST(1.90 AS Decimal(5, 2)))
+GO
+INSERT [dbo].[Interests] ([Id], [Date], [RuleId], [Rate]) VALUES (N'59252aa3-be8d-44f9-c13f-08dcf0f4397c', CAST(N'2023-06-15T10:48:51.7924170' AS DateTime2), N'RULE03', CAST(2.20 AS Decimal(5, 2)))
+GO
+INSERT [dbo].[Transactions] ([Id], [Amount], [TransactionDate], [Description], [Type], [AccountId], [Balance]) VALUES (N'55e82f68-b86e-443e-db79-08dcf0f3b301', CAST(100.00 AS Decimal(18, 2)), CAST(N'2023-05-05T10:41:05.0602077' AS DateTime2), N'Initial Deposit', 0, N'4a62ae47-3cee-4f69-0cbc-08dcf0f3b2d2', CAST(100.00 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[Transactions] ([Id], [Amount], [TransactionDate], [Description], [Type], [AccountId], [Balance]) VALUES (N'51702f73-384e-4ea8-2ba4-08dcf19510a3', CAST(25000.00 AS Decimal(18, 2)), CAST(N'2024-10-21T05:56:11.1296299' AS DateTime2), N'Initial Deposit', 0, N'06066f60-474f-4ce5-0e76-08dcf1951097', CAST(25000.00 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[Transactions] ([Id], [Amount], [TransactionDate], [Description], [Type], [AccountId], [Balance]) VALUES (N'1c1e4a22-3918-46ea-8648-376accea22e9', CAST(100.00 AS Decimal(18, 2)), CAST(N'2023-06-26T10:43:47.9026171' AS DateTime2), N'2nd Withdrawal', 1, N'4a62ae47-3cee-4f69-0cbc-08dcf0f3b2d2', CAST(130.00 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[Transactions] ([Id], [Amount], [TransactionDate], [Description], [Type], [AccountId], [Balance]) VALUES (N'4eed5d27-f511-4a5b-9940-53812fe852bb', CAST(20.00 AS Decimal(18, 2)), CAST(N'2023-06-26T10:43:21.1232166' AS DateTime2), N'1St Withdrawal', 1, N'4a62ae47-3cee-4f69-0cbc-08dcf0f3b2d2', CAST(230.00 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[Transactions] ([Id], [Amount], [TransactionDate], [Description], [Type], [AccountId], [Balance]) VALUES (N'2a0fc657-41af-4e9c-acee-7e884cd861f7', CAST(50.00 AS Decimal(18, 2)), CAST(N'2024-10-21T06:11:08.8363236' AS DateTime2), N'1st Withdraw', 1, N'06066f60-474f-4ce5-0e76-08dcf1951097', CAST(25050.00 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[Transactions] ([Id], [Amount], [TransactionDate], [Description], [Type], [AccountId], [Balance]) VALUES (N'134b8d74-2108-499d-aed9-a2460d30ac44', CAST(150.00 AS Decimal(18, 2)), CAST(N'2023-06-01T10:42:24.4580388' AS DateTime2), N'1st Deposite', 0, N'4a62ae47-3cee-4f69-0cbc-08dcf0f3b2d2', CAST(250.00 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[Transactions] ([Id], [Amount], [TransactionDate], [Description], [Type], [AccountId], [Balance]) VALUES (N'159d4a58-5a20-414e-a8ff-bc851084e848', CAST(0.39 AS Decimal(18, 2)), CAST(N'2024-10-22T02:17:16.9986528' AS DateTime2), N'Interetst for the Month of 10-2024', 2, N'4a62ae47-3cee-4f69-0cbc-08dcf0f3b2d2', CAST(130.39 AS Decimal(18, 2)))
+GO
+INSERT [dbo].[Transactions] ([Id], [Amount], [TransactionDate], [Description], [Type], [AccountId], [Balance]) VALUES (N'e314ef64-3549-40cb-9e7c-ccbd449a5198', CAST(100.00 AS Decimal(18, 2)), CAST(N'2024-10-21T06:10:43.6570421' AS DateTime2), N'1st Depo', 0, N'06066f60-474f-4ce5-0e76-08dcf1951097', CAST(25100.00 AS Decimal(18, 2)))
+GO
