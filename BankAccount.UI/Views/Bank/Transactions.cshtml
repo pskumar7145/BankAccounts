@@ -1,0 +1,58 @@
+﻿@using API.Models.DTO
+@model AccountWithTransactionsDTO
+
+@{
+    ViewData["Title"] = "Account Transactions";
+}
+
+<div class="container">
+    <h2>@ViewData["Title"]</h2>
+
+        <div class="card shadow-lg">
+            <div class="card-header bg-success text-white">
+                <h4 class="mb-0">Name: @Model.FullName | A/C# @Model.AccountNumber</h4>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                <button id="exportPdf" class="btn btn-danger"><i class="fas fa-file-pdf"></i> Export to PDF</button>
+                <button id="exportExcel" class="btn btn-secondary" disabled><i class="fas fa-file-excel"></i> Export to Excel (Under Construction)</button>
+                </div>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Transaction Date</th>
+                            <th>Type</th>
+                            <th>Amount</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var transaction in Model.Transactions)
+                        {
+                            <tr>
+                                <td>@transaction.TransactionDate</td>
+                                <td>@transaction.Type</td>
+                                <td>@transaction.Amount.ToString("C")</td>
+                                <td>@transaction.Description</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer bg-light text-dark">
+                <h5 class="mb-0">Current Balance: @Model.Balance.ToString("C")</h5>
+            </div>
+        </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.getElementById('exportExcel').addEventListener('click', function () {
+            window.location.href = '@Url.Action("ExportToExcel", "Bank", new { accountId = Model.Id })';
+        });
+
+        document.getElementById('exportPdf').addEventListener('click', function () {
+            window.location.href = '@Url.Action("ExportToPdf", "Bank", new { accountId = Model.Id })';
+        });
+    </script>
+}

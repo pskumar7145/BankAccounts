@@ -1,0 +1,128 @@
+﻿@using API.Models.DTO
+@using Newtonsoft.Json
+@model AccountWithTransactionsDTO
+
+@{
+    ViewData["Title"] = "Account Transactions";
+}
+
+<div class="container">
+    <h2>@ViewData["Title"]</h2>
+
+    <div class="card shadow-lg">
+        <div class="card-header bg-success text-white">
+            <h1 class="mb-0">Name: @Model.FullName | A/C# @Model.AccountNumber</h1>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Transaction Date</th>
+                        <th>Type</th>
+                        <th>Amount</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var transaction in Model.Transactions)
+                    {
+                        <tr>
+                            <td>@transaction.TransactionDate.ToString("dd MMM yyyy")</td>
+                            <td>@transaction.Type</td>
+                            <td>@transaction.Amount.ToString("C")</td>
+                            <td>@transaction.Description</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer bg-light">
+            <h2>Balance: @Model.Balance.ToString("C")</h2>
+        </div>
+    </div>
+
+    <div class="card shadow-lg mt-2">
+        <div class="card-header bg-info text-white">
+            <h2 class="mb-0">Transaction Summary</h2>
+        </div>
+        <div class="card-body">
+            <div style="width: 500px; height: 500px; margin: 0 auto;">
+                <canvas id="transactionChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* bar chart
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var ctx = document.getElementById('transactionChart').getContext('2d');
+            var chartData = @Html.Raw(JsonConvert.SerializeObject(ViewBag.TransactionSummary));
+            var transactionChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Deposit', 'Withdrawal', 'Current Balance'],
+                    datasets: [{
+                        label: 'Amount',
+                        data: chartData,
+                        backgroundColor: ['#4caf50', '#f44336', '#2196f3'],
+                        borderColor: ['#388e3c', '#d32f2f', '#1976d2'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+} *@
+
+@* pie chart *@
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var ctx = document.getElementById('transactionChart').getContext('2d');
+            var chartData = @Html.Raw(JsonConvert.SerializeObject(ViewBag.TransactionSummary));
+            var transactionChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Deposit', 'Withdrawal', 'Current Balance'],
+                    datasets: [{
+                        label: 'Amount',
+                        data: chartData,
+                        backgroundColor: ['#4caf50', '#f44336', '#2196f3'],
+                        borderColor: ['#000000', '#000000', '#000000'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    weight: 'bold'
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (tooltipItem) {
+                                    return tooltipItem.label + ': ' + tooltipItem.raw.toLocaleString('en-IN', { style: 'currency', currency: 'INR' });
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+}

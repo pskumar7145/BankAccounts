@@ -1,0 +1,196 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"] GIC Bank Account</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/BankAccountSimulation.UI.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <style>
+        /* Sidebar */
+        #sidebar {
+            height: 100vh;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            background-color: #343a40;
+            transition: all 0.3s;
+            padding-top: 60px;
+        }
+
+            #sidebar.active {
+                left: 0;
+            }
+
+        /* Adjust content and top navbar when sidebar is active */
+        #content {
+            transition: margin-left 0.3s;
+            margin-left: 0;
+            padding: 20px;
+        }
+
+        #sidebar.active + #content {
+            margin-left: 250px;
+        }
+
+        #sidebarCollapse {
+            margin-left: 0;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            background: #343a40;
+            color: #fff;
+        }
+
+        .list-unstyled {
+            padding-left: 0;
+        }
+
+            .list-unstyled li a {
+                padding: 10px 20px;
+                display: block;
+                color: #fff;
+                text-decoration: none;
+            }
+
+                .list-unstyled li a:hover {
+                    background: #495057;
+                }
+
+        /* navbar above the sidebar */
+        header .navbar {
+            z-index: 1100;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <button type="button" id="sidebarCollapse" class="btn btn-dark">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <a class="navbar-brand ms-3" asp-area="" asp-controller="Bank" asp-action="Dashboard">
+                    <img src="~/SelvaBankProject1.jpg" alt="SelvaBankProject" height="40px" width="40px" />GIC Bank Account
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="wrapper d-flex">
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>GIC Account</h3>
+            </div>
+            <ul class="list-unstyled components">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="@Url.Action("Dashboard", "Bank")">
+                        <i class="fas fa-tachometer-alt"></i>
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#accountSubMenu" aria-expanded="false" aria-controls="accountSubMenu">
+                        <i class="fas fa-user"></i>
+                        Accounts
+                    </a>
+                    <div class="collapse" id="accountSubMenu">
+                        <ul class="nav flex-column ms-3">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Create", "Bank")"><i class="fas fa-user-plus"></i> Create Account</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index", "Bank")"><i class="fas fa-users"></i> View Accounts</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#interestSubMenu" aria-expanded="false" aria-controls="interestSubMenu">
+                        <i class="fa fa-cog fa-spin fa-fw"></i>
+                        Interests
+                    </a>
+                    <div class="collapse" id="interestSubMenu">
+                        <ul class="nav flex-column ms-3">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("InterestRules", "Bank")"><i class="fa fa-clipboard" aria-hidden="true"></i> Interest Rule</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("InterestList", "Bank")"><i class="fa fa-list" aria-hidden="true"></i> View Rules</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#transactionSubMenu" aria-expanded="false" aria-controls="transactionSubMenu">
+                        <i class="fas fa-exchange-alt"></i>
+                        Transactions
+                    </a>
+                    <div class="collapse" id="transactionSubMenu">
+                        <ul class="nav flex-column ms-3">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Deposits", "Bank")"><i class="fas fa-wallet"></i> Deposits</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Expenses", "Bank")"><i class="fas fa-credit-card"></i> Withdrawals</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+
+        <div id="content" class="w-100">
+            <main role="main" class="pb-3">
+                @await Html.PartialAsync("_Alert")
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2024 - Thank you for banking with AwesomeGIC Bank - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+                $('#content').toggleClass('active');
+            });
+        });
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,104 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+
+
+/*custom styles*/
+.card-header.bg-primary {
+    background-color: #007bff !important; /* Customize header color */
+}
+
+.card {
+    border-radius: 10px; /* Rounded corners */
+}
+
+.shadow-lg {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important; /* Customize shadow */
+}
+
+
+
+/*alert*/
+.alert {
+    position: fixed; /* Use fixed positioning to keep it in place */
+    top: 70px; /* Distance from the top of the viewport */
+    right: 20px; /* Distance from the right edge of the viewport */
+    width: 300px; /* Set the desired width */
+    max-width: 100%; /* Ensure the alert doesn't exceed the container width */
+    height: auto; /* Allow height to adjust based on content */
+    max-height: 150px; /* Set a maximum height to prevent excessive height */
+    overflow: hidden; /* Hide overflow if content exceeds max height */
+    padding: 15px;
+    margin: 0; /* Remove default margin */
+    border: 1px solid transparent;
+    border-radius: 4px;
+    z-index: 1050; /* Ensure it's above other content */
+}
+
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
+.alert-warning {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+}
+
+.alert-info {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bcdff1;
+}
+
+/*dashboard*/
+.dashboard-card {
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+    .dashboard-card .card-body {
+        text-align: center;
+    }
+
+        .dashboard-card .card-body i {
+            font-size: 3rem;
+        }
+
+        .dashboard-card .card-body h5 {
+            margin-top: 10px;
+        }
+
+        .dashboard-card .card-body a {
+            text-decoration: none;
+            color: inherit;
+        }

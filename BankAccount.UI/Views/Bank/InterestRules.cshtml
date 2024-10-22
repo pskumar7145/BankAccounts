@@ -1,0 +1,42 @@
+﻿@using API.Models.DTO
+@model InterestDTO
+
+@{
+    ViewData["Title"] = "Create Interest Rule";
+}
+
+<div class="container">
+    <h2>@ViewData["Title"]</h2>
+
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Create New Interst Rule</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="InterestRules" method="post" autocomplete="off">
+                <div class="mb-3">
+                    <label asp-for="RuleId" class="form-label">Rule Id</label>
+                    <input asp-for="RuleId" class="form-control" />
+                    <span asp-validation-for="RuleId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Rate" class="form-label">Rate</label>
+                    <input asp-for="Rate" type="number" step="0.01" class="form-control" />
+                    <span asp-validation-for="Rate" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save Interest Rule</button>
+                    <a asp-action="InterestList" class="btn btn-success"><i class="fas fa-list"></i> Interests List</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

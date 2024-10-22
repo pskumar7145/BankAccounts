@@ -1,0 +1,64 @@
+﻿@model BankAccountSimulation.UI.Models.DashboardViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bank Account - Dashboard </title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />   
+</head>
+<body>
+
+    <div class="container">
+        <h2>Your account at a glance</h2>
+        <div class="row">
+            <!-- Total Deposits Card -->
+            <div class="col-md-4">
+                <a asp-action="Deposits" asp-controller="Bank" class="text-decoration-none">
+                    <div class="card dashboard-card">
+                        <div class="card-body">
+                            <i class="fa-solid fa-coins"></i>
+                            <i class="fa-solid fa-money-check-dollar text-primary"></i>
+                            <h5 class="card-title mt-3">Deposits</h5>
+                            <p class="card-text">@Model.TotalDeposits.ToString("C")</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+            <div class="row">
+            <!-- Total Expenses Card -->
+            <div class="col-md-4">
+                <a asp-action="Expenses" asp-controller="Bank" class="text-decoration-none">
+                    <div class="card dashboard-card">
+                        <div class="card-body">
+                            <i class="fa-solid fa-hand-holding-dollar text-danger"></i>
+                            <h5 class="card-title mt-3">Withdrawals</h5>
+                            <p class="card-text">@Model.TotalExpenses.ToString("C")</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Current Balance Card -->
+            <div class="col-md-4">
+                <div class="card dashboard-card">
+                    <div class="card-body">
+                        <i class="fa-solid fa-scale-balanced text-success"></i>
+                        <h5 class="card-title mt-3">Balance</h5>
+                        <p class="card-text">@Model.CurrentBalance.ToString("C")</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

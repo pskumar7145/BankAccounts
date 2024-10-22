@@ -1,0 +1,64 @@
+﻿@model BankAccountSimulation.UI.Models.DepositsViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deposits - Bank Account</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="container">
+        <h2>Deposits</h2>
+
+        <div class="card shadow-lg">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Deposit List</h4>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Deposits != null && Model.Deposits.Any())
+                        {
+                            @foreach (var deposit in Model.Deposits)
+                            {
+                                <tr>
+                                    <td>@deposit.Id</td>
+                                    <td>@deposit.Date.ToString()</td>
+                                    <td class="text-end">@deposit.Amount.ToString("C")</td>
+                                    <td>@deposit.Description</td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td><strong>Total: </strong></td>
+                            <td class="text-end"><strong>@Model.TotalDeposits.ToString("C")</strong></td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+          @*   <div class="card-footer bg-light text-end">
+                <strong>Total Deposits: @Model.TotalDeposits.ToString("C")</strong>
+            </div> *@
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

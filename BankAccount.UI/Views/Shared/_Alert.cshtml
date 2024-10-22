@@ -1,0 +1,7 @@
+﻿@if (TempData["AlertMessage"] != null)
+{
+    <div id="alert" class="alert alert-@TempData["AlertType"]" role="alert">
+        @TempData["AlertMessage"]
+    </div>
+}
+<script src="~/js/customjs.js"></script>

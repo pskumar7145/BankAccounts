@@ -1,0 +1,71 @@
+﻿@using API.Models.DTO
+@using BankAccountSimulation.UI.Models
+@model PaginationModel<AccountDTO>
+
+@{
+    ViewData["Title"] = "Account List";
+}
+
+<div class="container">
+    <h2>@ViewData["Title"]</h2>
+
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Accounts</h4>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>E-Mail</th>
+                        <th>Account Number</th>
+                        <th>Balance</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var account in Model.Items)
+                    {
+                        <tr>
+                            <td>@account.FullName</td>
+                            <td>@account.Email</td>
+                            <td>@account.AccountNumber</td>
+                            <td>@account.Balance.ToString("C")</td>
+                            <td class="text-center">
+                                <a asp-action="DepositWithdraw" asp-route-id="@account.Id" class="btn btn-primary btn-sm"><i class="fas fa-exchange-alt"></i> Create Deposit/Withdraw</a>
+                                <a asp-action="Details" asp-route-id="@account.Id" class="btn btn-info btn-sm"><i class="fas fa-info-circle"></i> Details</a>
+                                <a asp-action="Transactions" asp-route-id="@account.Id" class="btn btn-success btn-sm"><i class="fas fa-exchange-alt"></i> Transactions</a>
+                                <!-- Add more actions if needed -->
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    @if (Model.HasPreviousPage)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" asp-action="Index" asp-route-pageNumber="@(Model.PageNumber - 1)"><i class="fas fa-arrow-left"></i></a>
+                        </li>
+                    }
+                    @for (int i = 1; i <= Model.TotalPages; i++)
+                    {
+                        <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                            <a class="page-link" asp-action="Index" asp-route-pageNumber="@i">@i</a>
+                        </li>
+                    }
+                    @if (Model.HasNextPage)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" asp-action="Index" asp-route-pageNumber="@(Model.PageNumber + 1)"><i class="fas fa-arrow-right"></i></a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

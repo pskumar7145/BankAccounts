@@ -1,0 +1,62 @@
+﻿@using API.Models.DTO
+@using BankAccountSimulation.UI.Models
+@model PaginationModel<InterestDTO>
+
+@{
+    ViewData["Title"] = "Interest List";
+}
+
+<div class="container">
+    <h2>@ViewData["Title"]</h2>
+
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Interets Rate Rules</h4>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>RileId</th>
+                        <th>Rate(%)</th>                        
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var account in Model.Items)
+                    {
+                        <tr>
+                            <td>@account.Date</td>
+                            <td>@account.RuleId</td>
+                            <td>@account.Rate</td>                           
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    @if (Model.HasPreviousPage)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" asp-action="InterestList" asp-route-pageNumber="@(Model.PageNumber - 1)"><i class="fas fa-arrow-left"></i></a>
+                        </li>
+                    }
+                    @for (int i = 1; i <= Model.TotalPages; i++)
+                    {
+                        <li class="page-item @(i == Model.PageNumber ? "active" : "")">
+                            <a class="page-link" asp-action="InterestList" asp-route-pageNumber="@i">@i</a>
+                        </li>
+                    }
+                    @if (Model.HasNextPage)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" asp-action="InterestList" asp-route-pageNumber="@(Model.PageNumber + 1)"><i class="fas fa-arrow-right"></i></a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Platforms>AnyCPU;x64</Platforms>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Content Remove="wwwroot\js\customJs.js" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="wwwroot\js\customJS.js" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="EPPlus" Version="7.2.2" />
+		<PackageReference Include="iTextSharp" Version="5.5.13.4" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.6" />
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.3" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\BankAccounts\API.csproj" />
+	</ItemGroup>
+
+</Project>
